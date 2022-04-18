@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\MetaController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -30,8 +31,8 @@ Route::group([
     "middleware" => "auth:api",
     "prefix" => "meta"
 ], function(){
-    Route::get("permission", [\App\Http\Controllers\MetaController::class, "permissionIndex"]);
-    Route::get("role", [\App\Http\Controllers\MetaController::class, "roleIndex"]);
+    Route::get("permission", [MetaController::class, "permissionIndex"]);
+    Route::get("role", [MetaController::class, "roleIndex"]);
 });
 
 Route::group([
