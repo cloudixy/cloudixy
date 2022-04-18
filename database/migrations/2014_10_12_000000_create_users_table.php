@@ -21,7 +21,9 @@ return new class extends Migration
             $table->string('password');
             $table->longText("avatar")->nullable();
             $table->string("gitlab_id")->nullable();
-            $table->rememberToken();
+            $table->foreignId("invited_by")->nullable()->references("id")->on("users");
+            $table->json("metadata")->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }
