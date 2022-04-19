@@ -19,7 +19,11 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->rememberToken();
+            $table->longText("avatar")->nullable();
+            $table->string("gitlab_id")->nullable();
+            $table->foreignId("invited_by")->nullable()->references("id")->on("users");
+            $table->json("metadata")->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }
