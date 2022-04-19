@@ -1,8 +1,13 @@
-# Cloudixy API
+<p align="center">
+    <img src="logo.png" alt="logo" width="200"/>
+    <h1 align="center">Cloudixy API</h1>
+</p>
 
-Cloudixy is an application, which makes web application generation, 
+<p>Cloudixy is an application, which makes web application generation, 
 developing and deploying much easier, by providing simple UI for configuring
-web applications.
+web applications.</p>
+
+
 
 ## Setup
 
