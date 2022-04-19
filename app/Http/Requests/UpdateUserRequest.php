@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
@@ -8,10 +10,8 @@ class UpdateUserRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
-     *
-     * @return bool
      */
-    public function authorize()
+    public function authorize(): bool
     {
         return true;
     }
@@ -21,14 +21,14 @@ class UpdateUserRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules(): array
     {
         return [
-            "email" => ["required", "email", "unique:users"],
-            "name" => ["required", "string"],
-            "roles" => ["array"],
-            "roles.*" => ["exists:roles,name"],
-            "gitlabUsername" => ["present"]
+            'email' => ['required', 'email', 'unique:users'],
+            'name' => ['required', 'string'],
+            'roles' => ['array'],
+            'roles.*' => ['exists:roles,name'],
+            'gitlabUsername' => ['present'],
         ];
     }
 }

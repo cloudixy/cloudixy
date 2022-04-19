@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Console\Commands;
 
 use App\Models\User;
@@ -23,25 +25,22 @@ class CreateOwnerUser extends Command
 
     /**
      * Execute the console command.
-     *
-     * @return int
      */
-    public function handle()
+    public function handle(): int
     {
-        $name = $this->ask("Name", "admin");
-        $email = $this->ask("Email");
-        $password = $this->secret("Password");
+        $name = $this->ask('Name', 'admin');
+        $email = $this->ask('Email');
+        $password = $this->secret('Password');
 
         $user = User::query()->create([
-            "name" => $name,
-            "email" => $email,
-            "password" => bcrypt($password)
+            'name' => $name,
+            'email' => $email,
+            'password' => bcrypt($password),
         ]);
 
         $user->assignRole('owner');
 
         $this->info("User {$user->email} with ID {$user->id} created successfully");
-
 
         return 0;
     }

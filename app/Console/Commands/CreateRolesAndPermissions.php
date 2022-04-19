@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
@@ -8,18 +10,18 @@ use Spatie\Permission\Models\Role;
 
 class CreateRolesAndPermissions extends Command
 {
-    const PERMISSIONS = [
-        "view users",
-        "create users"
+    public const PERMISSIONS = [
+        'view users',
+        'create users',
     ];
-    const ROLES = [
-        "owner" => [
-            "view users",
-            "create users"
+    public const ROLES = [
+        'owner' => [
+            'view users',
+            'create users',
         ],
-        "developer" => [
-            "view users"
-        ]
+        'developer' => [
+            'view users',
+        ],
     ];
     /**
      * The name and signature of the console command.
@@ -37,28 +39,25 @@ class CreateRolesAndPermissions extends Command
 
     /**
      * Execute the console command.
-     *
-     * @return int
      */
-    public function handle()
+    public function handle(): int
     {
-        $this->info("Creating permissions");
-        foreach (self::PERMISSIONS as $permission){
+        $this->info('Creating permissions');
+        foreach (self::PERMISSIONS as $permission) {
             Permission::query()->updateOrCreate([
-                "name" => $permission
+                'name' => $permission,
             ]);
         }
-        $this->info("Permissions created");
+        $this->info('Permissions created');
 
-        $this->info("Creating roles");
-        foreach (self::ROLES as $role => $permissions){
+        $this->info('Creating roles');
+        foreach (self::ROLES as $role => $permissions) {
             $roleModel = Role::query()->updateOrCreate([
-                "name" => $role
+                'name' => $role,
             ]);
             $roleModel->syncPermissions($permissions);
-
         }
-        $this->info("Roles created");
+        $this->info('Roles created');
         return 0;
     }
 }
