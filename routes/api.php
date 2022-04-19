@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CredentialController;
 use App\Http\Controllers\MetaController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -45,4 +46,12 @@ Route::group([
     Route::post('', [UserController::class, 'store'])->middleware(['can:create users']);
     Route::put('{user}', [UserController::class, 'update'])->middleware(['can:create users']);
     Route::delete('{user}', [UserController::class, 'destroy'])->middleware(['can:create users']);
+});
+
+Route::group([
+    'middleware' => 'auth:api',
+    'prefix' => 'credential',
+], function (): void {
+    Route::get('', [CredentialController::class, 'index'])->middleware(['can:view credentials']);
+    Route::post('', [CredentialController::class, 'store'])->middleware(['can:create credentials']);
 });

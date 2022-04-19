@@ -11,7 +11,7 @@ class UserResource extends JsonResource
     /**
      * Transform the resource into an array.
      */
-    public function toArray(\Illuminate\Http\Request $request): array|\Illuminate\Contracts\Support\Arrayable|\JsonSerializable
+    public function toArray($request): array
     {
         return [
             'id' => $this->id,
