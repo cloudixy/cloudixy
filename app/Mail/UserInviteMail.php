@@ -19,7 +19,6 @@ class UserInviteMail extends Mailable
      */
     public function __construct(protected string $csv)
     {
-        
     }
 
     /**
