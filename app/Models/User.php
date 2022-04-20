@@ -25,6 +25,7 @@ class User extends Authenticatable implements JWTSubject
         'email',
         'password',
         'avatar',
+        'metadata',
         'gitlab_id',
         'invited_by',
     ];
@@ -46,6 +47,7 @@ class User extends Authenticatable implements JWTSubject
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'metadata' => 'array',
     ];
 
     /**

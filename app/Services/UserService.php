@@ -5,7 +5,11 @@ declare(strict_types=1);
 namespace App\Services;
 
 use App\Mail\UserInviteMail;
+use App\Models\Credentials\Credential;
+use App\Models\Credentials\GitlabCredential;
 use App\Models\User;
+use App\Services\API\GitlabAPI;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
@@ -41,6 +45,16 @@ class UserService
         return $user;
     }
 
+    public function syncUser(User $user, string|int $credentialId)
+    {
+        /** @var Credential $credential */
+        $credential = Credential::query()->find($credentialId);
+        switch ($credential->type) {
+            case 'gitlab':
+                $this->syncGitlab($user, $credential);
+        }
+    }
+
     private static function generatePassword(): string
     {
         return Str::random();
@@ -49,5 +63,26 @@ class UserService
     private function createNewUserCsv(User $user, string $password)
     {
         return "{$user->email},{$password}";
+    }
+
+    private function syncGitlab(User $user, Credential $credential)
+    {
+        /** @var GitlabCredential $gitlabCredential */
+        $gitlabCredential = GitlabCredential::query()->find($credential->id);
+        $gitlabApi = new GitlabAPI($gitlabCredential);
+        $metadata = ! is_null($user->metadata) ? $user->metadata : [];
+
+        $gitlabUsername = Arr::get($metadata, 'gitlabUsername', null);
+        if (is_null($gitlabUsername)) {
+            return;
+        }
+
+        $gitlabId = Arr::get($gitlabApi->getUsers(['username' => $gitlabUsername]), '0.id', null);
+        if (! is_null($gitlabId)) {
+            $user->gitlab_id = $gitlabId;
+            $metadata['gitlabData'] = $gitlabApi->getUser($gitlabId);
+            $user->metadata = $metadata;
+            $user->save();
+        }
     }
 }

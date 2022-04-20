@@ -44,6 +44,7 @@ Route::group([
     Route::get('', [UserController::class, 'index'])->middleware(['can:view users']);
     Route::get('{user}', [UserController::class, 'show'])->middleware(['can:view users']);
     Route::post('', [UserController::class, 'store'])->middleware(['can:create users']);
+    Route::post('{user}/sync', [UserController::class, 'syncUserWithExternal'])->middleware(['can:create users']);
     Route::put('{user}', [UserController::class, 'update'])->middleware(['can:create users']);
     Route::delete('{user}', [UserController::class, 'destroy'])->middleware(['can:create users']);
 });
