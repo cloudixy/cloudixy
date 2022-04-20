@@ -13,14 +13,19 @@ class CreateRolesAndPermissions extends Command
     public const PERMISSIONS = [
         'view users',
         'create users',
+        'view credentials',
+        'create credentials',
     ];
     public const ROLES = [
         'owner' => [
             'view users',
             'create users',
+            'view credentials',
+            'create credentials',
         ],
         'developer' => [
             'view users',
+            'view credentials',
         ],
     ];
     /**
