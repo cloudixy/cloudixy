@@ -3,10 +3,11 @@
     <h1 align="center">Cloudixy API</h1>
 </p>
 
+> **Cloudixy is in development stage and is not ready for use.**
+
 <p>Cloudixy is an application, which makes web application generation, 
 developing and deploying much easier, by providing simple UI for configuring
 web applications.</p>
-
 
 
 ## Setup
