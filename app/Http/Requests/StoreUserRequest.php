@@ -28,7 +28,7 @@ class StoreUserRequest extends FormRequest
             'name' => ['required', 'string'],
             'roles' => ['array'],
             'roles.*' => ['exists:roles,name'],
-            'gitlabUsername' => ['present']
+            'gitlabUsername' => ['present'],
         ];
     }
 }

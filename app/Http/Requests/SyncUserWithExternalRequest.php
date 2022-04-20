@@ -24,7 +24,7 @@ class SyncUserWithExternalRequest extends FormRequest
     public function rules()
     {
         return [
-            "credentialId" => ["required", "exists:credentials,id"]
+            'credentialId' => ['required', 'exists:credentials,id'],
         ];
     }
 }

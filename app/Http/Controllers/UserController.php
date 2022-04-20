@@ -11,7 +11,6 @@ use App\Http\Resources\UserResource;
 use App\Models\User;
 use App\Services\UserService;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
-use Illuminate\Support\Facades\Request;
 
 class UserController extends Controller
 {
@@ -65,8 +64,9 @@ class UserController extends Controller
         return UserResource::make($user);
     }
 
-    public function syncUserWithExternal(User $user, SyncUserWithExternalRequest $request){
-        $this->userService->syncUser($user, $request->validated("credentialId"));
+    public function syncUserWithExternal(User $user, SyncUserWithExternalRequest $request)
+    {
+        $this->userService->syncUser($user, $request->validated('credentialId'));
         return UserResource::make($user);
     }
 }
