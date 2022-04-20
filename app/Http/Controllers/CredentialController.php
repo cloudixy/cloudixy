@@ -18,19 +18,21 @@ class CredentialController extends Controller
         return CredentialResource::collection(Credential::all());
     }
 
-    public function store(StoreCredentialRequest $request){
+    public function store(StoreCredentialRequest $request)
+    {
         $data = $request->validated();
         $credentials = $this->credentialService->storeCredential(
-            $data["type"],
-            $data["credentials"],
-            $data["name"],
-            $data["description"]
+            $data['type'],
+            $data['credentials'],
+            $data['name'],
+            $data['description']
         );
 
         return CredentialResource::make($credentials);
     }
 
-    public function destroy(Credential $credentials){
+    public function destroy(Credential $credentials)
+    {
         $credentials->delete();
         return CredentialResource::make($credentials);
     }

@@ -24,23 +24,23 @@ class StoreCredentialRequest extends FormRequest
     public function rules()
     {
         $rules = [
-            "type" => ["required", "in:gitlab"],
-            "name" => ["required", "string"],
-            "description" => ["present"],
-            "credentials" => ["required", "array"]
+            'type' => ['required', 'in:gitlab'],
+            'name' => ['required', 'string'],
+            'description' => ['present'],
+            'credentials' => ['required', 'array'],
         ];
 
-        $rules += $this->getTypeCredentialsValidation($this->get("type"));
+        $rules += $this->getTypeCredentialsValidation($this->get('type'));
 
         return $rules;
     }
 
     private function getTypeCredentialsValidation(string|null $type): array
     {
-        return match($type){
-            "gitlab" => [
-                "credentials.accessTokenName" => ["required", "string"],
-                "credentials.accessTokenSecret" => ["required", "string"]
+        return match ($type) {
+            'gitlab' => [
+                'credentials.accessTokenName' => ['required', 'string'],
+                'credentials.accessTokenSecret' => ['required', 'string'],
             ],
             default => []
         };

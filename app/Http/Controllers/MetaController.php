@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Resources\PermissionResource;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
-use Illuminate\Http\Request;
 
 class MetaController extends Controller
 {

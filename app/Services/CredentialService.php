@@ -3,7 +3,6 @@
 namespace App\Services;
 
 use App\Models\Credentials\Credential;
-use App\Models\Credentials\GitlabCredential;
 use Illuminate\Support\Facades\Auth;
 
 class CredentialService
@@ -32,5 +31,4 @@ class CredentialService
             'type' => $type,
         ]);
     }
-
 }
