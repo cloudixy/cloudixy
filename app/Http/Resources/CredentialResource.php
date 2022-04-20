@@ -18,7 +18,7 @@ class CredentialResource extends JsonResource
             "name" => $this->name,
             "description" => $this->description,
             "type" => $this->type,
-            "createdAt" => $this->createdAt,
+            "createdAt" => $this->created_at,
             "credentials" => $this->getMaskedCredentials()
         ];
     }

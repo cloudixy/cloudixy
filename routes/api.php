@@ -54,4 +54,5 @@ Route::group([
 ], function (): void {
     Route::get('', [CredentialController::class, 'index'])->middleware(['can:view credentials']);
     Route::post('', [CredentialController::class, 'store'])->middleware(['can:create credentials']);
+    Route::delete('{credentials}', [CredentialController::class, 'destroy'])->middleware(['can:create credentials']);
 });

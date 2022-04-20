@@ -29,4 +29,9 @@ class CredentialController extends Controller
 
         return CredentialResource::make($credentials);
     }
+
+    public function destroy(Credential $credentials){
+        $credentials->delete();
+        return CredentialResource::make($credentials);
+    }
 }
