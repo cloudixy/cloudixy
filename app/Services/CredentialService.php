@@ -7,14 +7,14 @@ use Illuminate\Support\Facades\Auth;
 
 class CredentialService
 {
-    public function encryptArray(array $credentials): array
+    public static function encryptArray(array $credentials): array
     {
         return collect($credentials)->mapWithKeys(function ($item, $key) {
             return [$key => encrypt($item)];
         })->toArray();
     }
 
-    public function decryptArray(array $credentials): array
+    public static function decryptArray(array $credentials): array
     {
         return collect($credentials)->mapWithKeys(function ($item, $key) {
             return [$key => decrypt($item)];
