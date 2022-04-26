@@ -42,4 +42,23 @@ class GitlabAPI
             ])
             ->acceptJson();
     }
+
+    public function createProject($name, $description, $namespaceId = null, $defaultBranch = "develop"){
+        return $this->request->post("projects", [
+            "name" => $name,
+            "default_branch" => $defaultBranch,
+            "description" => $description,
+            "initialize_with_readme" => true,
+            "namespace_id" => $namespaceId
+        ])->json();
+    }
+
+    public function deleteProject($externalId){
+        return $this->request->delete("projects/{$externalId}")->json();
+    }
+
+    public function archiveProject($externalId){
+        return $this->request->post("projects/{$externalId}/archive")->json();
+
+    }
 }
